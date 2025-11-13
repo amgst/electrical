@@ -1,11 +1,10 @@
 import { Phone, Mail, MapPin, Menu } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -47,28 +46,11 @@ export function Header() {
           {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-6">
             <Link to="/" className="hover:text-blue-900 transition-colors">Home</Link>
-            {location.pathname === '/' ? (
-              <>
-                <a href="#services" className="hover:text-blue-900 transition-colors">Services</a>
-                <a href="#about" className="hover:text-blue-900 transition-colors">About</a>
-                <a href="#areas" className="hover:text-blue-900 transition-colors">Service Areas</a>
-              </>
-            ) : (
-              <>
-                <Link to="/#services" className="hover:text-blue-900 transition-colors" onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = '/#services';
-                }}>Services</Link>
-                <Link to="/#about" className="hover:text-blue-900 transition-colors" onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = '/#about';
-                }}>About</Link>
-                <Link to="/#areas" className="hover:text-blue-900 transition-colors" onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = '/#areas';
-                }}>Service Areas</Link>
-              </>
-            )}
+            <Link to="/services" className="hover:text-blue-900 transition-colors">Services</Link>
+            <Link to="/about" className="hover:text-blue-900 transition-colors">About</Link>
+            <Link to="/service-areas" className="hover:text-blue-900 transition-colors">Service Areas</Link>
+            <Link to="/why-choose-us" className="hover:text-blue-900 transition-colors">Why Choose Us</Link>
+            <Link to="/testimonials" className="hover:text-blue-900 transition-colors">Testimonials</Link>
             <Link to="/contact" className="hover:text-blue-900 transition-colors">Contact</Link>
             <Link to="/contact">
               <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
@@ -90,31 +72,11 @@ export function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden pt-4 pb-2 flex flex-col gap-3">
             <Link to="/" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-            {location.pathname === '/' ? (
-              <>
-                <a href="#services" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Services</a>
-                <a href="#about" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>About</a>
-                <a href="#areas" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Service Areas</a>
-              </>
-            ) : (
-              <>
-                <Link to="/#services" className="py-2 hover:text-blue-900 transition-colors" onClick={(e) => {
-                  e.preventDefault();
-                  setMobileMenuOpen(false);
-                  window.location.href = '/#services';
-                }}>Services</Link>
-                <Link to="/#about" className="py-2 hover:text-blue-900 transition-colors" onClick={(e) => {
-                  e.preventDefault();
-                  setMobileMenuOpen(false);
-                  window.location.href = '/#about';
-                }}>About</Link>
-                <Link to="/#areas" className="py-2 hover:text-blue-900 transition-colors" onClick={(e) => {
-                  e.preventDefault();
-                  setMobileMenuOpen(false);
-                  window.location.href = '/#areas';
-                }}>Service Areas</Link>
-              </>
-            )}
+            <Link to="/services" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Services</Link>
+            <Link to="/about" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>About</Link>
+            <Link to="/service-areas" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Service Areas</Link>
+            <Link to="/why-choose-us" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Why Choose Us</Link>
+            <Link to="/testimonials" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Testimonials</Link>
             <Link to="/contact" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
               <Button className="bg-yellow-500 hover:bg-yellow-600 text-black w-full">

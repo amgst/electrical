@@ -6,24 +6,10 @@ import { WhyChooseUs } from '../components/WhyChooseUs';
 import { ServiceAreas } from '../components/ServiceAreas';
 import { Testimonials } from '../components/Testimonials';
 import { Footer } from '../components/Footer';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 export function Home() {
-  const location = useLocation();
-
-  useEffect(() => {
-    // Handle hash links when navigating from other pages
-    if (location.hash) {
-      const element = document.querySelector(location.hash);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
-    }
-  }, [location.hash]);
-
+  // Home page shows all sections as previews
+  // Each section can also be accessed as a separate page via navigation
   return (
     <div className="min-h-screen">
       <Header />
