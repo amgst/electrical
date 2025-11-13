@@ -3,6 +3,8 @@
 
 This is a code bundle for Website Design Inspiration. The original project is available at https://www.figma.com/design/BXnvJTal68JpXyh5eqSgyM/Website-Design-Inspiration.
 
+> **Note:** This project is configured for automatic deployment to GitHub Pages via GitHub Actions.
+
 ## Running the code
 
 Run `npm i` to install the dependencies.
