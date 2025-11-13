@@ -4,6 +4,9 @@
   import path from 'path';
 
   export default defineConfig({
+    // Base path for GitHub Pages - change this to your repository name if deploying to a subdirectory
+    // Use '/' if deploying to the root of your GitHub Pages site
+    base: process.env.GITHUB_PAGES ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1] || ''}/` : '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -51,7 +54,7 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'dist', // Changed to 'dist' for GitHub Pages compatibility
     },
     server: {
       port: 3000,
