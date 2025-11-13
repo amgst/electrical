@@ -3,10 +3,14 @@
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
 
+  // Get repository name from environment or default to 'electrical'
+  const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'electrical';
+  const base = process.env.GITHUB_PAGES ? `/${repoName}/` : '/';
+
   export default defineConfig({
-    // Base path for GitHub Pages - change this to your repository name if deploying to a subdirectory
-    // Use '/' if deploying to the root of your GitHub Pages site
-    base: process.env.GITHUB_PAGES ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1] || ''}/` : '/',
+    // Base path for GitHub Pages
+    // For custom domain or root deployment, change to: base: '/'
+    base: base,
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -55,7 +59,14 @@
     build: {
       target: 'esnext',
       outDir: 'dist', // Changed to 'dist' for GitHub Pages compatibility
+      // Copy 404.html for SPA routing support on GitHub Pages
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+        },
+      },
     },
+    publicDir: 'public',
     server: {
       port: 3000,
       open: true,

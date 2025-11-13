@@ -43,4 +43,36 @@ To preview the production build:
 ```bash
 npm run preview
 ```
+
+### Troubleshooting
+
+If you see only the raw HTML (empty page with just the `<div id="root"></div>`), check the following:
+
+1. **Verify GitHub Pages is using GitHub Actions:**
+   - Go to Settings → Pages in your repository
+   - Under "Source", it should say "GitHub Actions" (not "Deploy from a branch")
+   - If it's set to a branch, change it to "GitHub Actions"
+
+2. **Check if the workflow has run:**
+   - Go to the "Actions" tab in your repository
+   - Look for the "Deploy to GitHub Pages" workflow
+   - Make sure it has run and completed successfully (green checkmark)
+   - If it failed, click on it to see the error details
+
+3. **Verify the workflow file exists:**
+   - Make sure `.github/workflows/deploy.yml` exists in your repository
+   - If not, commit and push the file
+
+4. **Check the repository name:**
+   - The base path is automatically set to your repository name
+   - If your repo is named something other than `electrical`, the paths should still work automatically
+   - Your site URL will be: `https://yourusername.github.io/repository-name/`
+
+5. **Wait for deployment:**
+   - After pushing, it may take 1-2 minutes for the site to update
+   - Check the Actions tab to see when deployment completes
+
+6. **Clear browser cache:**
+   - Hard refresh the page (Ctrl+F5 or Cmd+Shift+R)
+   - Or try in an incognito/private window
   
