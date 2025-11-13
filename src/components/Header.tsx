@@ -1,9 +1,11 @@
 import { Phone, Mail, MapPin, Menu } from 'lucide-react';
 import { Button } from './ui/button';
 import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -32,7 +34,7 @@ export function Header() {
       {/* Main navigation */}
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center">
               <span className="text-white">⚡</span>
             </div>
@@ -40,18 +42,39 @@ export function Header() {
               <div className="text-blue-900">Everything Electrical</div>
               <div className="text-gray-600">Sydney</div>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-6">
-            <a href="#home" className="hover:text-blue-900 transition-colors">Home</a>
-            <a href="#services" className="hover:text-blue-900 transition-colors">Services</a>
-            <a href="#about" className="hover:text-blue-900 transition-colors">About</a>
-            <a href="#areas" className="hover:text-blue-900 transition-colors">Service Areas</a>
-            <a href="#contact" className="hover:text-blue-900 transition-colors">Contact</a>
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
-              Get a Free Quote
-            </Button>
+            <Link to="/" className="hover:text-blue-900 transition-colors">Home</Link>
+            {location.pathname === '/' ? (
+              <>
+                <a href="#services" className="hover:text-blue-900 transition-colors">Services</a>
+                <a href="#about" className="hover:text-blue-900 transition-colors">About</a>
+                <a href="#areas" className="hover:text-blue-900 transition-colors">Service Areas</a>
+              </>
+            ) : (
+              <>
+                <Link to="/#services" className="hover:text-blue-900 transition-colors" onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = '/#services';
+                }}>Services</Link>
+                <Link to="/#about" className="hover:text-blue-900 transition-colors" onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = '/#about';
+                }}>About</Link>
+                <Link to="/#areas" className="hover:text-blue-900 transition-colors" onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = '/#areas';
+                }}>Service Areas</Link>
+              </>
+            )}
+            <Link to="/contact" className="hover:text-blue-900 transition-colors">Contact</Link>
+            <Link to="/contact">
+              <Button className="bg-yellow-500 hover:bg-yellow-600 text-black">
+                Get a Free Quote
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -66,14 +89,38 @@ export function Header() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden pt-4 pb-2 flex flex-col gap-3">
-            <a href="#home" className="py-2 hover:text-blue-900 transition-colors">Home</a>
-            <a href="#services" className="py-2 hover:text-blue-900 transition-colors">Services</a>
-            <a href="#about" className="py-2 hover:text-blue-900 transition-colors">About</a>
-            <a href="#areas" className="py-2 hover:text-blue-900 transition-colors">Service Areas</a>
-            <a href="#contact" className="py-2 hover:text-blue-900 transition-colors">Contact</a>
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-black w-full">
-              Get a Free Quote
-            </Button>
+            <Link to="/" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+            {location.pathname === '/' ? (
+              <>
+                <a href="#services" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Services</a>
+                <a href="#about" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>About</a>
+                <a href="#areas" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Service Areas</a>
+              </>
+            ) : (
+              <>
+                <Link to="/#services" className="py-2 hover:text-blue-900 transition-colors" onClick={(e) => {
+                  e.preventDefault();
+                  setMobileMenuOpen(false);
+                  window.location.href = '/#services';
+                }}>Services</Link>
+                <Link to="/#about" className="py-2 hover:text-blue-900 transition-colors" onClick={(e) => {
+                  e.preventDefault();
+                  setMobileMenuOpen(false);
+                  window.location.href = '/#about';
+                }}>About</Link>
+                <Link to="/#areas" className="py-2 hover:text-blue-900 transition-colors" onClick={(e) => {
+                  e.preventDefault();
+                  setMobileMenuOpen(false);
+                  window.location.href = '/#areas';
+                }}>Service Areas</Link>
+              </>
+            )}
+            <Link to="/contact" className="py-2 hover:text-blue-900 transition-colors" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+            <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+              <Button className="bg-yellow-500 hover:bg-yellow-600 text-black w-full">
+                Get a Free Quote
+              </Button>
+            </Link>
           </div>
         )}
       </nav>
